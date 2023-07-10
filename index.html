@@ -4,9 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/main.css">
-    <title>Document</title>
+    <title>Guessing Game</title>
+    <script src="../js/guessing-game.js" defer></script>
 </head>
 <body>
+    <div class="container">
+        
+        <div class="center">
+            <h1>Play the Guessing Game!</h1>
+            <h3 id="subtitle">Guess a number between 1-100!</h3>
+        </div>
+
+        <div id="guess-feedback" center="center">
+           <h4></h4>
+        </div>
+
+        <div>
+            <div id="input-parent">
+                <input class="center" id="player-input" placeholder="TYPE GUESS HERE" maxlength="3" autofocus=autofocus></input>
+                <button id="submit">Go!</button>
+            </div>
+
+            <div class="myguess">
+                <ul id="guess-list">
+                    <li class="guess">-</li>
+                    <li class="guess">-</li>
+                    <li class="guess">-</li>
+                    <li class="guess">-</li>
+                    <li class="guess">-</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="btn">
+            <button id="btn1">RESET THE GAME</button>
+            <button id="btn2">NEED A HINT?</button>
+        </div>
+
+        <div id="footer" class="center">
+            <div>
+                <h4 style="color: #DC7633;">Project by Lishu Maharjan</h4>
+            </div>
+        </div>
+
+    </div>
+    
     
 </body>
 </html>
