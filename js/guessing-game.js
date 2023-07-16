@@ -7,6 +7,8 @@ In this file, you will also include the event listeners that are needed to inter
 a user clicks a button or adds a guess to the input field.
 
 */
+
+document.getElementById('');
 class Game
 {
     constructor()
@@ -15,12 +17,12 @@ class Game
         this.pastGuesses = [];
         this.winningNumber = generateWinningNumber();
     };
-}
-    Game.prototype.difference = function()
+
+    difference()
     {
         return Math.abs(this.playersGuess - this.winningNumber);
     }
-    Game.prototype.isLower = function()
+    isLower()
     {
         if(this.playersGuess < this.winningNumber)
         {
@@ -31,17 +33,18 @@ class Game
             return false;
         }
     }
-    Game.prototype.playersGuessSubmission= function(num)
+    playersGuessSubmission(num)
     {
-        this.playersGuess = num;
+        // this.playersGuess = num;
         if(typeof num !== 'number' || num < 1 || num > 100)
         {
             throw 'That is an invalid guess.';
         }
+        this.playersGuess = num;
         
         return this.checkGuess();
     }
-    Game.prototype.checkGuess = function()
+    checkGuess()
     {
         let str = '';
         if(this.playersGuess === this.winningNumber)
@@ -54,35 +57,22 @@ class Game
         }
         else
         {
-            this.pastGuesses.push(this.playersGuess);
-            document.getElementsByClassName("guess")[
-                `${this.pastGuesses.length}` - 1
-              ].innerHTML = this.playersGuess;
-            if(this.pastGuesses.length === 5)
+            let diff = this.difference();
+            if (diff < 10) 
             {
-                str = "You Lose.";
-                document.querySelector("#subtitle").innerHTML = "Please! reset the game";
+                str = "You're burning up!";
+            }
+            else if (diff < 25) 
+            {
+                str = "You're lukewarm.";
+            }
+            else if (diff < 50) 
+            {
+                str = "You're a bit chilly.";
             }
             else 
             {
-                // let diff = 0;
-                let diff = this.difference();
-                if(diff < 10)
-                {
-                    str = "You're burning up!";
-                }
-                else if(diff < 25)
-                {
-                    str = "You\'re lukewarm.";
-                }
-                else if(diff < 50)
-                {
-                    str = "You\'re a bit chilly.";
-                }
-                else 
-                {
-                    str = "You\'re ice cold!";
-                }
+                str = "You're ice cold!";
             }
             document.querySelector('#guess-feedback > h4').innerHTML = str;
             document.querySelector(`#guess-list li:nth-child(${this.pastGuesses.length})`).innerHTML = this.playersGuess
@@ -90,7 +80,7 @@ class Game
         return str;
     }
     
-    Game.prototype.provideHint = function()
+    provideHint()
     {
         let arr = [
             this.winningNumber,
@@ -99,12 +89,13 @@ class Game
         ];
         return shuffle(arr);
     }
-
+}
 
 function generateWinningNumber()
 {
-    let num = Math.random() * 100;
-    return Math.ceil(num);
+    // let num = Math.random() * 100;
+    // return Math.ceil(num);
+    return Math.ceil(Math.random() * 100);
 }
 
 function newGame()
@@ -133,7 +124,7 @@ function playGame()
     let button = document.querySelector('button');
     button.addEventListener('click', function()
     {
-        let playersGuess =+document.querySelector('input').value;
+        let playersGuess = +document.querySelector('input').value;
         game.playersGuessSubmission(playersGuess);
     });
 
@@ -151,6 +142,12 @@ function playGame()
             "#subtitle"
         ).innerHTML = `Your number may be ${val[0]},${val[1]} or ${val[2]}.`;
     })
+    // button.addEventListener('click', function()
+    // {
+    //     let playersGuess = +document.querySelector('input').value;
+    //     document.querySelector('input').value = '';
+    //     game.playersGuessSubmission(playersGuess);
+    // });
 }
 playGame();
 
